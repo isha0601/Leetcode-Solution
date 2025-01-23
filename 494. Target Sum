@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int targetSum(vector<int> & A,int i,int s , int target){
+      int n=A.size();
+      if(s==target && i==n){
+          return 1;
+      }
+      if(i>=n){
+          return 0; 
+      }
+      
+      return targetSum(A, i + 1, s + A[i], target)
+           + targetSum(A, i + 1, s - A[i], target);
+  }
+    int findTargetSumWays(vector<int>& nums, int target) {
+     
+        return targetSum(nums,0,0,target);
+    }
+};
