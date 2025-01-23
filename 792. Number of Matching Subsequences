@@ -1,0 +1,25 @@
+class Solution {
+public:
+    bool check(string s, string word){
+        int j=0;
+        int n=word.length();
+        for(int i=0;i<s.length();i++){
+            if(s[i]==word[j])
+            j++;
+        }
+        return j==n;
+    }
+    int numMatchingSubseq(string s, vector<string>& words) {
+        int count=0;
+        unordered_map<string,int> mp;
+        for(int i=0;i<words.size();i++){
+            mp[words[i]]++;
+        }
+        for(auto& it: mp){
+            if(check(s,it.first)){
+                count+=it.second;
+            }
+        }
+        return count;
+    }
+};
