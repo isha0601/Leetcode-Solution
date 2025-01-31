@@ -1,0 +1,8 @@
+class Solution {
+public:
+    bool repeatedSubstringPattern(string s) {
+        string str= s+ s;
+        string removeFirstAndLast= str.substr(1,str.length()-2);
+        return removeFirstAndLast.find(s)!=string::npos;
+    }
+};
