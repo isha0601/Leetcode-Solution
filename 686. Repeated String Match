@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int repeatedStringMatch(string a, string b) {
+        string str=a;
+        int count=1;
+        while(str.length()<b.length()){
+            str+=a;
+            count++;
+        }
+        if(str.find(b)!=-1)
+        return count;
+
+        str+=a;
+        if(str.find(b)!=-1){
+            return count+1;
+        }
+        return -1;
+    }
+};
