@@ -1,0 +1,20 @@
+class Solution {
+public:
+  string getHappyString(int n, int k) {
+    vector<string> happyStrings;
+    generateHappyStrings(n, "", happyStrings);
+    return happyStrings.size() < k ? "" : happyStrings[k - 1];
+  }
+
+private:
+  void generateHappyStrings(int n, string current, vector<string> &result) {
+    if (current.size() == n) {
+      result.push_back(current);
+      return;
+    }
+    for (char ch = 'a'; ch <= 'c'; ch++) {
+      if (!current.empty() && current.back() == ch) continue;
+      generateHappyStrings(n, current + ch, result);
+    }
+  }
+};
