@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int longestContinuousSubstring(string s) {
+        int total=1,count=1,n=s.length();
+        for(int i=1;i<n;i++){
+            if(s[i]-s[i-1]==1){
+            count++;
+            }
+            else{
+                total=max(total,count);
+                count=1;
+            }
+        }
+        return max(total,count);
+    }
+};
