@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int kadane1(vector<int>& nums){
+        int max1_sum=nums[0];
+        int curr_sum=nums[0];
+        for(int i=1;i<nums.size();i++){
+            curr_sum=max(curr_sum+nums[i],nums[i]);
+            max1_sum=max(max1_sum,curr_sum);
+        }
+        return max1_sum;
+    }
+    int kadane2(vector<int>& nums){
+        int min1_sum=nums[0];
+        int curr_sum=nums[0];
+        for(int i=1;i<nums.size();i++){
+            curr_sum=min(curr_sum+nums[i],nums[i]);
+            min1_sum=min(min1_sum,curr_sum);
+        }
+        return min1_sum;
+    }
+    int maxAbsoluteSum(vector<int>& nums) {
+        return max(kadane1(nums),abs(kadane2(nums)));
+    }
+};
