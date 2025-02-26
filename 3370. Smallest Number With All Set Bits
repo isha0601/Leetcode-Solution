@@ -1,0 +1,13 @@
+class Solution {
+public:
+   
+    int smallestNumber(int n) {
+        int power=0;
+        while(power<n){
+            if(pow(2,power)>n)
+            break;
+            power++;
+        }
+        return pow(2,power)-1;
+    }
+};
