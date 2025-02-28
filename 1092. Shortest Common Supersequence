@@ -1,0 +1,41 @@
+class Solution {
+public:
+    vector<vector<int>> dp;
+    string str1,str2;
+    string shortestCommonSupersequence(string s1, string s2) {
+       str1=s1;str2=s2;
+       int n=str1.size(),m=str2.size();
+       dp.assign(n+1,vector<int>(m+1,0));
+       for(int j=m-1;j>=0;j--){
+        for(int i=n-1;i>=0;i--){
+            if(str1[i]==str2[j]){
+                dp[i][j]=1+dp[i+1][j+1];
+            }else{
+                dp[i][j]=max(dp[i+1][j],dp[i][j+1]);
+            }
+        }
+       }
+       string scs;
+       int i=0,j=0;
+       while(i<n && j<m){
+        if(str1[i]==str2[j]){
+            scs.push_back(str1[i]);
+            i++;
+            j++;
+        }else if(dp[i+1][j]>dp[i][j+1]){
+            scs.push_back(str1[i]);
+            i++;
+        }else{
+            scs.push_back(str2[j]);
+            j++;
+        }
+       }
+       while(i<n){
+        scs.push_back(str1[i++]);
+       }
+       while(j<m){
+        scs.push_back(str2[j++]);
+       }
+       return scs;
+    }
+};
