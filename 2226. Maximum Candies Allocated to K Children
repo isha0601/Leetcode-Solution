@@ -1,0 +1,22 @@
+class Solution {
+public:
+    bool cancandiesDistribute(vector<int>& candies, long long k,int portionSize){
+        long long count=0;
+        for(int pile:candies)count+=(pile/portionSize);
+        return count>=k;
+    }
+    int maximumCandies(vector<int>& candies, long long k) {
+     int left=1,right=*max_element(candies.begin(),candies.end());
+     int answer=0;
+     while(left<=right){
+        int mid=(left+right)/2;
+        if(cancandiesDistribute(candies,k,mid)){
+            left=mid+1;
+            answer=mid;
+        }else{
+            right=mid-1;
+        }
+     }  
+     return answer; 
+    }
+};
