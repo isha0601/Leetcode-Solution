@@ -1,0 +1,17 @@
+class Solution {
+public:
+    string categorizeBox(int length, int width, int height, int mass) {
+        long long vol = static_cast<long long>(pow(10, 9)); // force to integer
+        long long dim = static_cast<long long>(pow(10, 4));
+        bool dimCheck =length>=dim || width>=dim || height>=dim;
+        bool volCheck= 1LL*length*width*height >=vol;
+        bool bulkyCheck= dimCheck || volCheck;
+        bool massCheck =mass>=100;
+
+        if(bulkyCheck && massCheck) return "Both";
+        else if(bulkyCheck) return "Bulky";
+        else if(massCheck) return "Heavy";
+
+        return "Neither";
+    }
+};
