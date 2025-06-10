@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int findShortestSubArray(vector<int>& nums) {
+        unordered_map<int,int> mp,first,last;
+        int degree=0;
+        for(int i=0;i<nums.size();i++){
+            if(first.count(nums[i])==0)first[nums[i]]=i;
+            last[nums[i]]=i;
+            mp[nums[i]]++;
+            degree=max(degree,mp[nums[i]]);
+        }
+        int minLen=nums.size();
+        for(auto& it :mp){
+            if(it.second==degree){
+                minLen=min(minLen,last[it.first]-first[it.first]+1);
+            }
+
+        }
+
+        
+        return minLen;
+    }
+};
