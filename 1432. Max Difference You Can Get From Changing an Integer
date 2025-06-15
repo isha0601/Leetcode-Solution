@@ -1,0 +1,32 @@
+class Solution {
+public:
+    int maxDiff(int num) {
+          string s = to_string(num);
+        string a = s, b = s;
+
+       
+        for (char c : s) {
+            if (c != '9') {
+                for (char &ch : a) if (ch == c) ch = '9';
+                break;
+            }
+        }
+
+       
+        if (s[0] != '1') {
+            char x = s[0];
+            for (char &ch : b) if (ch == x) ch = '1';
+        } else {
+            for (int i = 1; i < s.size(); ++i) {
+                if (s[i] != '0' && s[i] != '1') {
+                    char x = s[i];
+                    for (int j = 1; j < b.size(); ++j)
+                        if (b[j] == x) b[j] = '0';
+                    break;
+                }
+            }
+        }
+
+        return stoi(a) - stoi(b);
+    }
+};
