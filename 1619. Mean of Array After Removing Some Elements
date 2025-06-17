@@ -1,0 +1,15 @@
+class Solution {
+public:
+    double trimMean(vector<int>& arr) {
+        sort(arr.begin(),arr.end());
+        double sum=0,count=0;
+        int n=arr.size();
+        double fivePer=(5*n)/100;
+        for(int i=fivePer;i<n-fivePer;i++){
+            sum+=arr[i];
+            count++;
+        }
+
+        return sum/count;
+    }
+};
