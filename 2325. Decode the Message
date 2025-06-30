@@ -1,0 +1,24 @@
+class Solution {
+public:
+    string decodeMessage(string key, string message) {
+        string str="";
+        unordered_map<char,char> mp;
+        char start='a';
+        for(char ch:key){
+            if(ch!=' ' && mp.find(ch)==mp.end()){
+                mp[ch]=start;
+                start++;
+            }   
+        }
+    for(char ch:message){
+        if( ch==' '){
+            str+=' ';
+        }else{
+            str+=mp[ch];
+        }
+    }
+
+
+        return str;
+    }
+};
