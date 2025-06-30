@@ -1,0 +1,13 @@
+class Solution {
+public:
+    vector<int> corpFlightBookings(vector<vector<int>>& bookings, int n) {
+        vector<int> answer(n,0);
+        for(auto& b:bookings){
+            int first=b[0],last=b[1],seat=b[2];
+            for(int i=first;i<=last;i++){
+                answer[i-1]+=seat;
+            }
+        }
+        return answer;
+    }
+};
