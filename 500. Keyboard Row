@@ -1,0 +1,21 @@
+class Solution {
+public:
+    vector<string> findWords(vector<string>& words) {
+        vector<string> answer;
+        string first ="qwertyuiop",second="asdfghjkl", third="zxcvbnm";
+
+        for(auto& word:words){
+            bool firstValid=true, secondValid=true,thirdValid=true;
+            for(char ch: word){
+                ch= tolower(ch);
+                if(firstValid && first.find(ch)==string::npos) firstValid =false;
+                if(secondValid && second.find(ch)==string::npos) secondValid =false;
+                if(thirdValid && third.find(ch)==string::npos) thirdValid=false;
+            }
+            if(firstValid || secondValid || thirdValid) answer.push_back(word);
+        }
+
+
+        return answer;
+    }
+};
