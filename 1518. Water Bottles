@@ -1,0 +1,13 @@
+class Solution {
+public:
+    int numWaterBottles(int numBottles, int numExchange) {
+        int count=numBottles;
+        while(numBottles>=numExchange){
+            int remainder=numBottles%numExchange;
+            int div=numBottles/numExchange;
+            numBottles=remainder+div;
+            count+=div;
+        }
+        return count;
+    }
+};
