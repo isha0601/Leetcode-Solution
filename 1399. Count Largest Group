@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int countLargestGroup(int n) {
+        vector<int> sum(37,0);
+        for(int i=1;i<=n;i++){
+            int countSum=0,num=i;
+            while(num>0){
+                countSum+=(num%10);
+                num/=10;
+            }
+            sum[countSum]++;
+        }
+        int maxCount=*max_element(sum.begin(),sum.end());
+
+        int count=0;
+
+        for(int num:sum){
+            if(num==maxCount)count++;
+        }
+        return count;
+    }
+};
