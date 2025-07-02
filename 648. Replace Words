@@ -1,0 +1,22 @@
+class Solution {
+public:
+    string replaceWords(vector<string>& dictionary, string sentence) {
+        stringstream ss(sentence);
+        string word,result="";
+
+        while(ss>> word){
+            string replacement=word;
+            for(const string& root: dictionary){
+                if(word.substr(0,root.size())==root && root.size() < replacement.size()){
+                    
+                        replacement=root;
+                    
+                }
+            }
+
+            if (!result.empty()) result += " ";
+            result+=replacement;
+        }
+        return result;
+    }
+};
