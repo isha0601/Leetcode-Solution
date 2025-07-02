@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int maxFreqSum(string s) {
+        vector<int> vowel(26,0), consonant(26,0);
+        for(int i=0;i<s.length();i++){
+            if(s[i]=='a'|| s[i]=='e' || s[i]=='i'|| s[i]=='o' || s[i]=='u'){
+                vowel[s[i]-'a']++;
+            }else{
+                consonant[s[i]-'a']++;
+            }
+            
+
+        } 
+        int maxVowel=*max_element(vowel.begin(),vowel.end());
+            int maxConsonant=*max_element(consonant.begin(),consonant.end());
+
+        return maxVowel+maxConsonant;
+    }
+};
