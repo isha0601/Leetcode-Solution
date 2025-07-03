@@ -1,0 +1,10 @@
+class Solution {
+public:
+    int distributeCandies(vector<int>& candyType) {
+        unordered_set<int> set;
+        for(int val:candyType){
+            set.insert(val);
+        }
+        return min(set.size(),candyType.size()/2);
+    }
+};
