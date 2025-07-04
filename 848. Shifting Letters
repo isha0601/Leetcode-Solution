@@ -1,0 +1,14 @@
+class Solution {
+public:
+    string shiftingLetters(string s, vector<int>& shifts) {
+         long long suffix = 0; // use long long to avoid overflow
+        int n = s.size();
+        
+        for (int i = n - 1; i >= 0; --i) {
+            suffix = (suffix + shifts[i]) % 26; // only mod 26 needed
+            s[i] = (char)((s[i] - 'a' + suffix) % 26 + 'a'); // shift
+        }
+        
+        return s;
+    }
+};
