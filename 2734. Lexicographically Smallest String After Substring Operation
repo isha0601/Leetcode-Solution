@@ -1,0 +1,25 @@
+class Solution {
+public:
+    string smallestString(string s) {
+         int n = s.size();
+        int i;
+
+        // Find the first non-'a' using a for loop
+        for (i = 0; i < n; ++i) {
+            if (s[i] != 'a') break;
+        }
+
+        // If all are 'a', change last to 'z'
+        if (i == n) {
+            s[n - 1] = 'z';
+            return s;
+        }
+
+        // Decrease consecutive non-'a's using for loop
+        for (; i < n && s[i] != 'a'; ++i) {
+            s[i] = s[i] - 1; // shift back by 1
+        }
+
+        return s;
+    }
+};
