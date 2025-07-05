@@ -1,0 +1,21 @@
+class Solution {
+public:
+    vector<int> findErrorNums(vector<int>& nums) {
+    vector<int> answer;
+    sort(nums.begin(),nums.end());
+    int duplicate=0;
+    for(int i=0;i<nums.size()-1;i++){
+        if(nums[i]==nums[i+1]){
+            duplicate=nums[i];break;
+        }
+    }
+    int sum=0;
+    for(int i=0;i<nums.size();i++){
+        sum+=nums[i];
+    }
+    sum-=duplicate;
+    int n=nums.size();
+    int actualSum=(n*(n+1))/2;
+    return {duplicate,actualSum-sum};
+    }
+};
