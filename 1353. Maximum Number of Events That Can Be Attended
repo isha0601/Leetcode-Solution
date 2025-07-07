@@ -1,0 +1,31 @@
+class Solution {
+public:
+    int maxEvents(vector<vector<int>>& events) {
+sort(events.begin(), events.end(), [](const auto& a, const auto& b) {
+            return a[1] < b[1];  // Sort by end day
+        });
+
+        int maxDay = 0;
+        for (const auto& e : events) {
+            maxDay = max(maxDay, e[1]);
+        }
+
+        set<int> availableDays;
+        for (int d = 1; d <= maxDay; ++d) {
+            availableDays.insert(d);
+        }
+
+        int res = 0;
+
+        for (const auto& e : events) {
+            // Find the first available day >= start
+            auto it = availableDays.lower_bound(e[0]);
+            if (it != availableDays.end() && *it <= e[1]) {
+                res++;
+                availableDays.erase(it);
+            }
+        }
+
+        return res;
+    }
+};
