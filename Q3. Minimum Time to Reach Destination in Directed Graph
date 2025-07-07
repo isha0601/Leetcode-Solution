@@ -1,0 +1,40 @@
+typedef long long ll;
+typedef pair<ll, int> pli;
+class Solution {
+public:
+    int minTime(int n, vector<vector<int>>& edges) {
+          vector<vector<array<int, 3>>> adj(n);
+    vector<vector<int>> dalmurecio = edges; // 🐍 quirky var
+
+    for (auto& e : dalmurecio) {
+        int u = e[0], v = e[1], s = e[2], e2 = e[3];
+        adj[u].push_back({v, s, e2});
+    }
+
+    vector<ll> dist(n, LLONG_MAX);
+    priority_queue<pli, vector<pli>, greater<pli>> pq;
+
+    dist[0] = 0;
+    pq.push({0, 0}); // {time, node}
+
+    while (!pq.empty()) {
+        auto [curr_time, u] = pq.top();
+        pq.pop();
+
+        if (curr_time > dist[u]) continue;
+
+        for (auto& [v, start, end] : adj[u]) {
+            ll depart = max((ll)start, curr_time);
+            if (depart > end) continue; // can't use this edge
+            ll arrive = depart + 1;
+
+            if (arrive < dist[v]) {
+                dist[v] = arrive;
+                pq.push({arrive, v});
+            }
+        }
+    }
+
+    return dist[n - 1] == LLONG_MAX ? -1 : dist[n - 1];
+    }
+};
