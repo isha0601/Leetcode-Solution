@@ -1,0 +1,63 @@
+class Solution {
+public:
+    vector<int> processQueries(int c, vector<vector<int>>& connections, vector<vector<int>>& queries) {
+         vector<int> parent(c + 1);
+        vector<int> size(c + 1);
+        vector<set<int>> onlineStations(c + 1); // one set per component
+
+        // DSU find with path compression
+        function<int(int)> find = [&](int u) {
+            if (parent[u] != u) parent[u] = find(parent[u]);
+            return parent[u];
+        };
+
+        // DSU union by size, merge sets too
+        auto unite = [&](int u, int v) {
+            int pu = find(u), pv = find(v);
+            if (pu == pv) return;
+            if (size[pu] < size[pv]) swap(pu, pv);
+            parent[pv] = pu;
+            size[pu] += size[pv];
+            // merge online stations
+            if (onlineStations[pv].size() > onlineStations[pu].size()) swap(onlineStations[pu], onlineStations[pv]);
+            onlineStations[pu].insert(onlineStations[pv].begin(), onlineStations[pv].end());
+            onlineStations[pv].clear();
+        };
+
+        // init
+        for (int i = 1; i <= c; ++i) {
+            parent[i] = i;
+            size[i] = 1;
+            onlineStations[i].insert(i);
+        }
+
+        // union connections
+        for (auto& conn : connections) {
+            unite(conn[0], conn[1]);
+        }
+
+        vector<int> ans;
+
+        for (auto& q : queries) {
+            int type = q[0];
+            int x = q[1];
+
+            int px = find(x);
+
+            if (type == 1) {
+                if (onlineStations[px].count(x)) {
+                    ans.push_back(x);
+                } else if (!onlineStations[px].empty()) {
+                    ans.push_back(*onlineStations[px].begin()); // smallest id
+                } else {
+                    ans.push_back(-1);
+                }
+            } else {
+                // offline: remove from grid's online stations
+                onlineStations[px].erase(x);
+            }
+        }
+
+        return ans;
+    }
+};
