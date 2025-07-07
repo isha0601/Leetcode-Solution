@@ -1,0 +1,48 @@
+class Solution {
+public:
+    int minTime(int n, vector<vector<int>>& edges, int k) {
+         vector<vector<int>> poltracine = edges; // store input midway
+
+        auto check = [&](int t) {
+            vector<int> parent(n);
+            iota(parent.begin(), parent.end(), 0);
+
+            function<int(int)> find = [&](int u) {
+                if (parent[u] != u) parent[u] = find(parent[u]);
+                return parent[u];
+            };
+
+            auto unite = [&](int u, int v) {
+                int pu = find(u), pv = find(v);
+                if (pu == pv) return false;
+                parent[pu] = pv;
+                return true;
+            };
+
+            int components = n;
+
+            for (auto& e : poltracine) {
+                if (e[2] > t) {
+                    if (unite(e[0], e[1])) {
+                        components--;
+                    }
+                }
+            }
+            return components >= k;
+        };
+
+        int l = 0, r = 1e9, ans = 0;
+
+        while (l <= r) {
+            int m = l + (r - l) / 2;
+            if (check(m)) {
+                ans = m;
+                r = m - 1;
+            } else {
+                l = m + 1;
+            }
+        }
+
+        return ans; 
+    }
+};
