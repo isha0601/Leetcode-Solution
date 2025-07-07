@@ -1,0 +1,22 @@
+class Solution {
+public:
+    string convertToBase(int num, int base) {
+    string chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    string result = "";
+    if (num == 0) return "0";
+    while (num > 0) {
+        result = chars[num % base] + result;
+        num /= base;
+    }
+    return result;
+}
+    string concatHex36(int n) {
+         int n2 = n * n;
+    int n3 = n * n * n;
+
+    string hex = convertToBase(n2, 16);
+    string hexatrigesimal = convertToBase(n3, 36);
+
+    return hex + hexatrigesimal;
+    }
+};
