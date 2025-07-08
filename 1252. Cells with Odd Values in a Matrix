@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int oddCells(int m, int n, vector<vector<int>>& indices) {
+         bool arr[m][n];
+        for(int i = 0; i < m; ++i){
+            for(int j = 0; j < n; ++j) arr[i][j] = false;
+        }
+        for(int i = 0, k = indices.size(); i < k; ++i){
+            int row = indices[i][0], col = indices[i][1];
+            for(int x = 0; x < m; ++x) arr[x][col] = !arr[x][col];
+            for(int y = 0; y < n; ++y) arr[row][y] = !arr[row][y];
+        }
+        int count = 0;
+        for(int i = 0; i < m; ++i){
+            for(int j = 0; j < n; ++j){
+                if(arr[i][j]) ++count;
+            }
+        }
+        return count;
+    }
+};
