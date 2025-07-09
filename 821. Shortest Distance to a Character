@@ -1,0 +1,24 @@
+class Solution {
+public:
+    vector<int> shortestToChar(string s, char c) {
+        int n = s.size();
+    vector<int> indices;
+
+    // Step 1: Collect all indices where s[i] == c
+    for (int i = 0; i < n; ++i) {
+        if (s[i] == c) {
+            indices.push_back(i);
+        }
+    }
+
+    vector<int> ans(n, INT_MAX);
+
+    // Step 2: For each position, find min distance to any index in indices[]
+    for (int i = 0; i < n; ++i) {
+        for (int idx : indices) {
+            ans[i] = min(ans[i], abs(i - idx));
+        }
+    }
+return ans;
+    }
+};
