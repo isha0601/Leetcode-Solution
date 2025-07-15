@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int duplicateNumbersXOR(vector<int>& nums) {
+        vector<bool> v(51,false);
+        int ans=0;
+        for(int num:nums){
+            if(!v[num])v[num]=true;
+            else{
+                ans^=num;
+                v[num]=false;
+            }
+        }
+
+        return ans;
+    }
+};
