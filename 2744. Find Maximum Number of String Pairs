@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int maximumNumberOfStringPairs(vector<string>& words) {
+        int count=0;
+        for(int i=0;i<words.size();i++){
+            string str=words[i];
+            reverse(words[i].begin(),words[i].end());
+            string strRev=words[i];
+            for(int j=i+1;j<words.size();j++){
+                if(words[j]==strRev)count++;
+            }
+        }
+
+        return count;
+    }
+};
