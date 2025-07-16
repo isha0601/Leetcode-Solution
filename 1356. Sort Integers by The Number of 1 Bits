@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int convertBinary(int n){
+        int countOne=0;
+        while(n!=0){
+            countOne+=n&1;
+            n>>=1;
+            
+        }
+        return countOne;
+    }
+    vector<int> sortByBits(vector<int>& arr) {
+        unordered_map<int,int> mp;
+        for(int i=0;i<arr.size();i++){
+            mp[arr[i]]=convertBinary(arr[i]);
+        }
+        sort(arr.begin(),arr.end(),[&](int a,int b){
+            if(mp[a]==mp[b])return a<b;
+            return mp[a]<mp[b];
+        });
+        return arr;
+    }
+};
