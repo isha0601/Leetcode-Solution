@@ -1,0 +1,44 @@
+class Solution {
+public:
+    int countBits(int n) {
+        int count = 0;
+        while (n) {
+            count += n & 1;
+            n >>= 1;
+        }
+    return count;
+    }
+    bool canSortArray(vector<int>& nums) {
+         unordered_map<int, int> bitCount;
+
+    // Cache bit counts
+    for (int num : nums) {
+        bitCount[num] = countBits(num);
+    }
+
+    int n = nums.size();
+
+    // Process segments with same bit count
+    int i = 0;
+    while (i < n) {
+        int j = i;
+        while (j + 1 < n && bitCount[nums[j]] == bitCount[nums[j + 1]]) {
+            j++;
+        }
+
+        // Sort this segment in place
+        sort(nums.begin() + i, nums.begin() + j + 1);
+
+        i = j + 1;
+    }
+
+    // Check if whole array is sorted now
+    for (int k = 1; k < n; k++) {
+        if (nums[k] < nums[k - 1]) {
+            return false;
+        }
+    }
+
+    return true;
+    }
+};
