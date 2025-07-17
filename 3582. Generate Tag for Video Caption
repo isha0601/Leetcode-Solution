@@ -1,0 +1,27 @@
+class Solution {
+public:
+    string generateTag(string caption) {
+        bool firstWord=true;
+        stringstream s(caption);
+        string word;
+        string str="#";
+
+        while(s>>word){
+            if(firstWord){
+                for(char c: word){
+                    str+=tolower(c);
+                }
+                firstWord=false;
+            }
+            else{
+                str+=toupper(word[0]);
+                for(int i=1;i<word.length();i++){
+                    str+=tolower(word[i]);
+                }
+            }
+        }
+        if(str.length()>100)return str.substr(0,100);
+
+        return str;
+    }
+};
