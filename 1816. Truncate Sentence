@@ -1,0 +1,15 @@
+class Solution {
+public:
+    string truncateSentence(string s, int k) {
+        string word;
+        string str="";
+        stringstream ss(s);
+       
+            while(ss>>word && k--){
+                str+=word;
+                str+=' ';
+            }
+        
+        return str.substr(0,str.length()-1);
+    }
+};
