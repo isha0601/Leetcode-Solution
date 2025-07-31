@@ -1,0 +1,13 @@
+class Solution {
+public:
+    bool hasMatch(std::string_view s, std::string_view p) {
+        int Pos = p.find('*');
+        auto before = p.substr(0 , Pos);
+        auto after = p.substr(Pos + 1);
+
+        int beforePos = s.find(before);
+        if (beforePos == -1) return false;
+        int afterPos = s.find(after, beforePos + before.size());
+        return afterPos != -1;
+    }
+};
