@@ -1,0 +1,18 @@
+class Solution {
+public:
+    string freqAlphabets(string s) {
+        int n = s.size();
+        string ans;
+        for(int i=n-1; i>=0; i--) {
+            if(s[i] == '#') {
+                string st = {s[i-2], s[i-1]};
+                int x = stoi(st);
+                ans.push_back(x - 1 + 'a');
+                i -= 2;
+            }
+            else ans.push_back(s[i] - '1' + 'a');
+        }
+        reverse(ans.begin(), ans.end());
+        return ans;
+    }
+};
