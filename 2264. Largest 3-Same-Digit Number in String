@@ -1,0 +1,16 @@
+class Solution {
+public:
+    string largestGoodInteger(string num) {
+       
+        priority_queue<string> maxHeap; 
+
+        for (int i = 0; i <= num.size() - 3; i++) {
+            string substring = num.substr(i, 3); 
+            if (substring[0] == substring[1] && substring[1] == substring[2]) {   
+                    maxHeap.push(substring); 
+                
+            }
+        }
+        return maxHeap.empty() ? "" : maxHeap.top();
+    }
+};
