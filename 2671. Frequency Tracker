@@ -1,0 +1,39 @@
+class FrequencyTracker {
+public:
+    unordered_map<int,int> freqOfNum, countOfFreq;
+    FrequencyTracker() {
+        
+    }
+    
+    void add(int number) {
+        int oldFreq=freqOfNum[number];
+        int newFreq=oldFreq+1;
+
+        freqOfNum[number]=newFreq;
+        if(oldFreq>0)countOfFreq[oldFreq]--;
+        countOfFreq[newFreq]++;
+    }
+    
+    void deleteOne(int number) {
+        if(!freqOfNum.count(number)|| freqOfNum[number]==0)return ;
+        int oldFreq=freqOfNum[number];
+        int newFreq=oldFreq-1;
+        freqOfNum[number]=newFreq;
+        countOfFreq[oldFreq]--;
+
+        if(newFreq>0)countOfFreq[newFreq]++;
+
+    }
+    
+    bool hasFrequency(int frequency) {
+        return countOfFreq[frequency]>0;
+    }
+};
+
+/**
+ * Your FrequencyTracker object will be instantiated and called as such:
+ * FrequencyTracker* obj = new FrequencyTracker();
+ * obj->add(number);
+ * obj->deleteOne(number);
+ * bool param_3 = obj->hasFrequency(frequency);
+ */
