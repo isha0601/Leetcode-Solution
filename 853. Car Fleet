@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int carFleet(int target, vector<int>& position, vector<int>& speed) {
+       vector<pair<int,int>> v;
+       for(int i=0;i<position.size();i++){
+        v.push_back({position[i],speed[i]});
+       } 
+       sort(v.rbegin(),v.rend());
+
+       stack<double> s;
+       for(auto [pos,sp]:v){
+        double timeTaken=(double)(target-pos)/sp;
+        if(s.empty() || timeTaken> s.top())s.push(timeTaken);
+       }
+       return s.size();
+    }
+};
