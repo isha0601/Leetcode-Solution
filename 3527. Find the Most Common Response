@@ -1,0 +1,22 @@
+class Solution {
+public:
+    string findCommonResponse(vector<vector<string>>& responses) {
+        unordered_map<string, int> mp;
+        for(auto &day:responses){
+            unordered_set<string> set(day.begin(),day.end());
+            for(const string &s:set){
+                mp[s]++;
+            }
+        }
+
+        string answer="";
+        int maxi=0;
+        for(auto &p:mp){
+            if(p.second>maxi || (p.second==maxi && p.first<answer)){
+                maxi=p.second;
+                answer=p.first;
+            }
+        }
+        return answer;
+    }
+};
