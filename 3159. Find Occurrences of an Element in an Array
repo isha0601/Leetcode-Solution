@@ -1,0 +1,16 @@
+class Solution {
+public:
+    vector<int> occurrencesOfElement(vector<int>& nums, vector<int>& queries, int x) {
+        vector<int> answer;
+        vector<int> idx;
+        for(int i=0;i<nums.size();i++){
+            if(nums[i]==x){
+                idx.push_back(i);
+            }
+        }
+        for(auto q:queries){
+            answer.push_back((q-1<idx.size())?idx[q-1]:-1);
+        }
+        return answer;
+    }
+};
