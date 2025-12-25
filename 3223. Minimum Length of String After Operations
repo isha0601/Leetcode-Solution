@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int minimumLength(string s) {
+        vector<int> v(26,0);
+        int count=0;
+        for(char &c:s){
+            v[c-'a']++;
+        }
+        for(int n:v){
+            if(n==0)continue;
+            if(n%2==0)count+=2;
+            else count+=1;
+        }
+
+        return count;
+    }
+};
