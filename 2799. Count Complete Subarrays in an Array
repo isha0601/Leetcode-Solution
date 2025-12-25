@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int countCompleteSubarrays(vector<int>& nums) {
+        set<int> s(nums.begin(),nums.end());
+        int n=s.size();
+        int count=0;
+        vector<int> v;
+        for(int i=0;i<nums.size();i++){
+    
+            set<int> set;
+            for(int j=i;j<nums.size();j++){
+                set.insert(nums[j]);
+                if(set.size()==n)count++;
+            }
+        }
+
+        return count;
+    }
+};
