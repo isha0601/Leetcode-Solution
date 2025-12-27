@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int GCD(int o,int e){
+        while(o!=e){
+            if(o>e)o-=e;
+            else e-=o;
+        }
+        return o;
+    }
+    int gcdOfOddEvenSums(int n) {
+        int sumODD=0,sumEVEN=0;
+        for(int i=1;i<=2*n;i++){
+            if(i%2==0)sumEVEN+=i;
+            else sumODD+=i;
+        }
+        return GCD(sumODD,sumEVEN);
+    }
+};
